@@ -44,7 +44,7 @@ export default function Login() {
 				</form>
 			</div>
 
-			<nav className="mt-5 text-sm text-gray-500 hover:text-yellow-600">
+			<nav className="mt-5 text-sm text-gray-500 hover:bg-amber-400">
 				<Link to="/auth/registro">¿No tienes cuenta? Registrate Aquí</Link>
 			</nav>
 		</>
