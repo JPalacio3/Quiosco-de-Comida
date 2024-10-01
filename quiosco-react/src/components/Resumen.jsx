@@ -7,7 +7,7 @@ export default function Resumen() {
 	const { pedido } = useQuiosco();
 
 	return (
-		<aside className="w-72 overflow-y-scroll p-5 ">
+		<aside className="overflow-y-scroll p-5 w-full md:w-72">
 			<h1 className="text-4xl font-black text-center">Mi Pedido</h1>
 
 			<p className="text-lg my-5 text-center font-bold mt-5">
@@ -24,7 +24,7 @@ export default function Resumen() {
 				)}
 			</div>
 
-			<p className="text-xl mt-10 text-indigo-700">
+			<p className="text-xl mt-10 text-indigo-600 font-bold">
 				Total:
 				<span>{""}</span>
 			</p>

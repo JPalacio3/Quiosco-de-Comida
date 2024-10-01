@@ -4,7 +4,7 @@ import { formatearDinero } from "../helpers";
 import { useState } from "react";
 
 export default function ModalProducto() {
-	const { producto, handleClickModal } = useQuiosco();
+	const { producto, handleClickModal, handleAgregarProducto } = useQuiosco();
 	const [cantidad, setCantidad] = useState(1);
 
 	return (
@@ -89,7 +89,8 @@ export default function ModalProducto() {
 
 				<button
 					type="button"
-					className="w-full md:w-auto bg-indigo-600  hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded">
+					className="w-full md:w-auto bg-indigo-600  hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+					onClick={() => handleAgregarProducto({ ...producto, cantidad })}>
 					Añadir al Pedido
 				</button>
 			</div>
