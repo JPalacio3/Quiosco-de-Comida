@@ -2,6 +2,7 @@
 
 import { formatearDinero } from "../helpers";
 import useQuiosco from "../hooks/useQuiosco";
+import ResumenProducto from "./ResumenProducto";
 
 export default function Resumen() {
 	const { pedido } = useQuiosco();
@@ -16,11 +17,13 @@ export default function Resumen() {
 
 			<div className="py-10">
 				{pedido.length === 0 ? (
-					<p className="text-center text-2xl uppercase text-indigo-600 font-black">
+					<p className="text-center text-2xl">
 						No hay elementos en tu pedido aún
 					</p>
 				) : (
-					<p>Si Hay Algo</p>
+					pedido.map((producto) => (
+						<ResumenProducto key={producto.id} producto={producto} />
+					))
 				)}
 			</div>
 

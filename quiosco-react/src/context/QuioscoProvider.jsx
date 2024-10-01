@@ -25,7 +25,7 @@ const QuioscoProvider = ({ children }) => {
 		setProducto(producto);
 	};
 
-	const handleAgregarProducto = ({ categoria_id, imagen, ...producto }) => {
+	const handleAgregarPedido = ({ categoria_id, imagen, ...producto }) => {
 		setPedido([...pedido, producto]);
 	};
 
@@ -41,7 +41,7 @@ const QuioscoProvider = ({ children }) => {
 				handleSetProducto,
 				pedido,
 				setPedido,
-				handleAgregarProducto,
+				handleAgregarPedido,
 			}}>
 			{children}
 		</QuioscoContext.Provider>
