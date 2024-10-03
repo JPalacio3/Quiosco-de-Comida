@@ -1,11 +1,23 @@
 /** @format */
+import { useState, useEffect } from "react";
 import useQuiosco from "../hooks/useQuiosco";
 import { formatearDinero } from "../helpers";
-import { useState } from "react";
 
 export default function ModalProducto() {
-	const { producto, handleClickModal, handleAgregarPedido } = useQuiosco();
+	const { producto, handleClickModal, handleAgregarPedido, pedido } =
+		useQuiosco();
 	const [cantidad, setCantidad] = useState(1);
+	const [edicion, setEdicion] = useState(false);
+
+	useEffect(() => {
+		if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
+			const productoEdicion = pedido.filter(
+				(pedidoState) => pedidoState.id === producto.id,
+			)[0];
+			setCantidad(productoEdicion.cantidad);
+			setEdicion(true);
+		}
+	}, [pedido]);
 
 	return (
 		<div className="md:flex gap-10 ">
@@ -24,13 +36,13 @@ export default function ModalProducto() {
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
-							strokeWidth={3.5}
+							strokeWidth={1}
 							stroke="currentColor"
-							className="w-8 h-8 bg-red-500 hover:bg-red-700 rounded-full text-white mt-5 md:mt-0">
+							className="w-7 bg-red-500 hover:bg-red-700 rounded-full text-white mt-5 md:mt-0">
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
-								d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12d9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+								d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
 							/>
 						</svg>
 					</button>
@@ -94,7 +106,7 @@ export default function ModalProducto() {
 						handleAgregarPedido({ ...producto, cantidad });
 						handleClickModal();
 					}}>
-					Añadir al Pedido
+					{edicion ? "Guardar Cambios" : "Añador al Pedido"}
 				</button>
 			</div>
 		</div>
