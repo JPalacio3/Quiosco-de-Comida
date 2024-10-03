@@ -7,6 +7,8 @@ import ResumenProducto from "./ResumenProducto";
 export default function Resumen() {
 	const { pedido, total } = useQuiosco();
 
+	const comprobarPedido = () => pedido.length === 0;
+
 	return (
 		<aside className="overflow-y-scroll p-5 w-full md:w-72">
 			<h1 className="text-4xl font-black text-center">Mi Pedido</h1>
@@ -38,9 +40,15 @@ export default function Resumen() {
 			<form className="w-full">
 				<div className="mt-5">
 					<input
-						className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 rounded uppercase font-bold text-white text-center w-full cursor-pointer"
+						className={`${
+							comprobarPedido()
+								? "bg-indigo-100 cursor-no-drop"
+								: "bg-indigo-600 hover:bg-indigo-800"
+						}
+						px-5 py-2 rounded uppercase font-bold text-white text-center w-full cursor-pointer`}
 						type="submit"
 						value={"Confirmar Pedido"}
+						disabled={comprobarPedido()}
 					/>
 				</div>
 			</form>
