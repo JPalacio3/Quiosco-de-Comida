@@ -8,11 +8,11 @@ export default function Producto({ producto }) {
 
 	return (
 		<>
-			<div className="border p-3 shadow bg-white rounded-xl flex flex-col justify-between">
+			<div className="border p-3 shadow bg-white rounded-xl flex flex-col justify-between transition-transform duration-300 ease-in-out hover:scale-105">
 				<img
 					src={`/img/${imagen}.jpg`}
 					alt={`imagen ${nombre}`}
-					className="w-full rounded-lg"
+					className="w-full rounded-lg "
 				/>
 
 				<div className="p-5">

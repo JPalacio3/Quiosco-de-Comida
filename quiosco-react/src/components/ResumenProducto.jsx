@@ -8,7 +8,7 @@ export default function ResumenProducto({ producto }) {
 	const { handleEditarCantidad, handleEliminarProductoPedido } = useQuiosco();
 
 	return (
-		<div className="shadow space-y-1 p-4 bg-white">
+		<div className="shadow space-y-1 p-4 mb-2 bg-white hover:bg-gray-50 rounded-xl ransition-transform duration-300 ease-in-out hover:scale-105">
 			<div className="space-y-2">
 				<p className="text-xl font-bold">{nombre}</p>
 				<p className="text-lg text-amber-500">

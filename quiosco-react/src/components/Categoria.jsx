@@ -8,8 +8,12 @@ export default function Categoria({ categoria }) {
 	return (
 		<>
 			<button
-				className={`${categoriaActual.id === id ? "bg-amber-400" : "bg-white"}
-				flex items-center gap-4 border w-full p-3  m-1 hover:bg-amber-400 cursor-pointer rounded-md`}
+				className={`${
+					categoriaActual.id === id
+						? "bg-amber-400 scale-105 rounded-none m-0"
+						: "bg-white"
+				}
+				flex items-center gap-4 border w-full p-3  m-1 hover:bg-amber-400 cursor-pointer rounded-md ransition-transform duration-300 ease-in-out hover:scale-105`}
 				type="button"
 				onClick={() => handleCkickCategoria(id)}>
 				<img
