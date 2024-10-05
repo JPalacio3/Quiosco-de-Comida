@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 
 class ProductoSeeder extends Seeder
 {
@@ -546,5 +547,6 @@ class ProductoSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ),
         ];
+        DB::table('productos')->insert($datos);
     }
 }
