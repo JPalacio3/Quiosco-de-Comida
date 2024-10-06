@@ -10,8 +10,6 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        // return response()->json(['categorias' => Categoria::all()]);
-
         return new CategoriaCollection(Categoria::all());
     }
 }

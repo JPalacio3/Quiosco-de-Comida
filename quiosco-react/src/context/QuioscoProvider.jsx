@@ -87,7 +87,6 @@ const QuioscoProvider = ({ children }) => {
 				producto,
 				handleSetProducto,
 				pedido,
-				setPedido,
 				handleAgregarPedido,
 				handleEditarCantidad,
 				handleEliminarProductoPedido,

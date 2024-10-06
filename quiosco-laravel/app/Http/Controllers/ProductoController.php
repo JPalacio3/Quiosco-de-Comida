@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ProductoCollection;
-use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Producto;
+use App\Http\Resources\ProductoCollection;
 
 class ProductoController extends Controller
 {
