@@ -40,6 +40,13 @@ class AuthController extends Controller
                 'errors' => ['La Contraseña es Incorrecta']
             ], 422);
         }
+
+        // Autenticación del Usuario
+        $user = Auth::user();
+        return [
+            'token' => $user->createToken('token')->plainTextToken,
+            'user' => 'user'
+        ];
     }
 
     public function logout(Request $request) {}

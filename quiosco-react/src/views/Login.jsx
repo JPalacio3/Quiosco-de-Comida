@@ -1,6 +1,6 @@
 /** @format */
 
-import { createRef, useState } from "react";
+import { createRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import Alerta from "../components/Alerta";
@@ -11,6 +11,14 @@ export default function Login() {
 
 	const [errores, setErrores] = useState([]);
 
+	// Usar useEffect para limpiar los errores después de 3 segundos
+	useEffect(() => {
+		if (errores.length > 0) {
+			const timer = setTimeout(() => setErrores([]), 3000);
+			return () => clearTimeout(timer); // Limpiar el temporizador cuando se desmonte el componente o cambien los errores
+		}
+	}, [errores]);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -20,7 +28,8 @@ export default function Login() {
 		};
 		try {
 			const { data } = await clienteAxios.post("/api/login", datos);
-			console.log(data.token);
+			localStorage.setItem("AUTH_TOKEN", data.token);
+			setErrores([]);
 		} catch (error) {
 			setErrores(Object.values(error.response.data.errors));
 		}
