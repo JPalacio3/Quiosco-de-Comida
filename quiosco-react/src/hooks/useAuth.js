@@ -38,12 +38,12 @@ export const useAuth = ({ middleware, url }) => {
 	const registro = () => {};
 	const logout = () => {};
 
-	console.log(user);
-	console.log(error);
-
 	useEffect(() => {
 		if (middleware === "guest" && url && user) {
-			navigate("/");
+			navigate(url);
+		}
+		if (middleware == "auth" && error) {
+			navigate("/auth/login");
 		}
 	}, [user, error]);
 
@@ -51,5 +51,7 @@ export const useAuth = ({ middleware, url }) => {
 		login,
 		registro,
 		logout,
+		user,
+		error,
 	};
 };

@@ -18,7 +18,7 @@ export default function Inicio() {
 	});
 
 	// console.log(data);
-	console.log(error);
+	// console.log(error);
 	// console.log(isLoading);
 	if (isLoading) return "Cargando...";
 

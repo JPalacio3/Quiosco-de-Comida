@@ -32,7 +32,7 @@ export default function Registro() {
 		};
 		try {
 			const { data } = await clienteAxios.post("api/registro", datos);
-			console.log(data.token);
+			// console.log(data.token);
 		} catch (error) {
 			setErrores(Object.values(error.response.data.errors));
 		}
