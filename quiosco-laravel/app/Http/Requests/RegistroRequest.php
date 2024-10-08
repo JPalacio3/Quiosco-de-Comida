@@ -20,16 +20,18 @@ class RegistroRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => [
                 'required',
                 'confirmed',
-                PasswordRules::min(8)->letters()->numbers()
-            ]
+                PasswordRules::min(8)
+                    ->letters()
+                    ->numbers()
+            ],
         ];
     }
 
@@ -40,7 +42,7 @@ class RegistroRequest extends FormRequest
             'email.required' => 'El Email es Obligatorio',
             'email.email' => 'El Email NO es Válido',
             'email.unique' => 'El Usuario ya está registrado',
-            'password' => 'La contraseña debe contener al menos 8 caracteres y  un número'
+            'password' => 'La contraseña debe contener al menos 8 caracteres y un número'
         ];
     }
 }

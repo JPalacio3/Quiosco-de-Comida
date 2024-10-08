@@ -1,8 +1,8 @@
 /** @format */
 
 import { createContext, useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import clienteAxios from "../config/axios";
+import { toast } from "react-toastify";
 
 const QuioscoContext = createContext();
 
@@ -31,7 +31,6 @@ const QuioscoProvider = ({ children }) => {
 			console.log(error);
 		}
 	};
-
 	useEffect(() => {
 		obtenerCategorias();
 	}, []);

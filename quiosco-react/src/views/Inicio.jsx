@@ -3,9 +3,9 @@
 // Mostramos los productos es la parte central
 
 import useSWR from "swr";
+import clienteAxios from "../config/axios";
 import Producto from "../components/Producto";
 import useQuiosco from "../hooks/useQuiosco";
-import clienteAxios from "../config/axios";
 
 export default function Inicio() {
 	const { categoriaActual } = useQuiosco();
@@ -18,7 +18,7 @@ export default function Inicio() {
 	});
 
 	// console.log(data);
-	// console.log(error);
+	console.log(error);
 	// console.log(isLoading);
 	if (isLoading) return "Cargando...";
 

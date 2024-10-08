@@ -9,7 +9,7 @@ export default function Registro() {
 	const nameRef = createRef();
 	const emailRef = createRef();
 	const passwordRef = createRef();
-	const PasswordConfirmationRef = createRef();
+	const passwordConfirmationRef = createRef();
 
 	const [errores, setErrores] = useState([]);
 
@@ -20,11 +20,11 @@ export default function Registro() {
 			name: nameRef.current.value,
 			email: emailRef.current.value,
 			password: passwordRef.current.value,
-			Password_confirmation: PasswordConfirmationRef.current.value,
+			password_confirmation: passwordConfirmationRef.current.value,
 		};
 		try {
-			const respuesta = await clienteAxios.post("api/registro", datos);
-			console.log(respuesta);
+			const { data } = await clienteAxios.post("api/registro", datos);
+			console.log(data.token);
 		} catch (error) {
 			setErrores(Object.values(error.response.data.errors));
 		}
@@ -94,7 +94,7 @@ export default function Registro() {
 							className="mt-2 w-full p-3 bg-gray-50 rounded-xl"
 							name="password_confirmation"
 							placeholder="Repite tu Contraseña"
-							ref={PasswordConfirmationRef}
+							ref={passwordConfirmationRef}
 						/>
 					</div>
 
