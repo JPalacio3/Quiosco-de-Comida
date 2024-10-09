@@ -21,6 +21,7 @@ export default function Login() {
 	useEffect(() => {
 		if (errores.length > 0) {
 			const timer = setTimeout(() => setErrores([]), 3000);
+			const timerLoading = setTimeout(() => setIsLoading(false), 800);
 			return () => clearTimeout(timer); // Limpiar el temporizador cuando se desmonte el componente o cambien los errores
 		}
 	}, [errores]);
@@ -80,14 +81,12 @@ export default function Login() {
 					<input
 						type="submit"
 						value={"Iniciar Sesión"}
-						className={`
-							${
-								isLoading
-									? "bg-gray-400 cursor-not-allowed"
-									: "bg-indigo-600 hover:bg-indigo-800"
-							}
-							text-white w-full mt-5 p-3 uppercase font-bold rounded-xl
-						`}
+						className={`${
+							isLoading
+								? "bg-gray-400 cursor-not-allowed"
+								: "bg-indigo-600 hover:bg-indigo-800"
+						}
+							text-white w-full mt-5 p-3 uppercase font-bold rounded-xl`}
 						disabled={isLoading} // Deshabilitar si isLoading es true
 						onClick={(e) => {
 							// Ejecutar el primer clic

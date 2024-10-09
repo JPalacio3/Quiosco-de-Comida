@@ -5,9 +5,14 @@ import useQuiosco from "../hooks/useQuiosco";
 import ResumenProducto from "./ResumenProducto";
 
 export default function Resumen() {
-	const { pedido, total } = useQuiosco();
+	const { pedido, total, handleSubmitNuevaOrden } = useQuiosco();
 
 	const comprobarPedido = () => pedido.length === 0;
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		handleSubmitNuevaOrden();
+	};
 
 	return (
 		<aside className="overflow-y-scroll p-5 w-full md:w-72">
@@ -37,7 +42,7 @@ export default function Resumen() {
 				</span>
 			</p>
 
-			<form className="w-full">
+			<form className="w-full" onSubmit={handleSubmit}>
 				<div className="mt-5">
 					<input
 						className={`${
