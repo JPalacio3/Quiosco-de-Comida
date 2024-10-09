@@ -4,6 +4,7 @@ import { createRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
 import { useAuth } from "../hooks/useAuth";
+import { LoadingAnimation } from "../components/Animation";
 
 export default function Registro() {
 	const nameRef = createRef();
@@ -11,6 +12,7 @@ export default function Registro() {
 	const passwordRef = createRef();
 	const passwordConfirmationRef = createRef();
 
+	const [isLoading, setIsLoading] = useState(false); // Estado para controlar la animación
 	const [errores, setErrores] = useState([]);
 	const { registro } = useAuth({ middleware: "guest", url: "/" });
 
@@ -18,12 +20,14 @@ export default function Registro() {
 	useEffect(() => {
 		if (errores.length > 0) {
 			const timer = setTimeout(() => setErrores([]), 3000);
+			const timerLoading = setTimeout(() => setIsLoading(false), 500);
 			return () => clearTimeout(timer); // Limpiar el temporizador cuando se desmonte el componente o cambien los errores
 		}
 	}, [errores]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		const datos = {
 			name: nameRef.current.value,
@@ -106,9 +110,24 @@ export default function Registro() {
 					<input
 						type="submit"
 						value={"Crear Cuenta"}
-						className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer rounded-xl "
+						className={`
+							${
+								isLoading
+									? "bg-gray-400 cursor-not-allowed"
+									: "bg-indigo-600 hover:bg-indigo-800"
+							}
+							text-white w-full mt-5 p-3 uppercase font-bold rounded-xl
+						`}
+						disabled={isLoading} // Deshabilitar si isLoading es true
 					/>
 				</form>
+
+				{/* Mostrar animación cuando isLoading es true */}
+				{isLoading && (
+					<div className="flex justify-center items-center mt-5 text-4xl">
+						<LoadingAnimation />
+					</div>
+				)}
 			</div>
 
 			<nav className="mt-5 text-sm text-gray-500 hover:bg-amber-100 rounded-xl p-2">

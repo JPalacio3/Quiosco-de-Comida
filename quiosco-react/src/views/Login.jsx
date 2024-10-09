@@ -4,11 +4,13 @@ import { createRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
 import { useAuth } from "../hooks/useAuth";
+import { LoadingAnimation } from "../components/Animation";
 
 export default function Login() {
 	const emailRef = createRef();
 	const passwordRef = createRef();
 
+	const [isLoading, setIsLoading] = useState(false); // Estado para controlar la animación
 	const [errores, setErrores] = useState([]);
 	const { login } = useAuth({
 		middleware: "guest",
@@ -25,6 +27,7 @@ export default function Login() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		const datos = {
 			email: emailRef.current.value,
@@ -77,9 +80,28 @@ export default function Login() {
 					<input
 						type="submit"
 						value={"Iniciar Sesión"}
-						className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold cursor-pointer rounded-xl "
+						className={`
+							${
+								isLoading
+									? "bg-gray-400 cursor-not-allowed"
+									: "bg-indigo-600 hover:bg-indigo-800"
+							}
+							text-white w-full mt-5 p-3 uppercase font-bold rounded-xl
+						`}
+						disabled={isLoading} // Deshabilitar si isLoading es true
+						onClick={(e) => {
+							// Ejecutar el primer clic
+							e.target.click(); // Simular el segundo clic
+						}}
 					/>
 				</form>
+
+				{/* Mostrar animación cuando isLoading es true */}
+				{isLoading && (
+					<div className="flex justify-center items-center mt-5 text-4xl">
+						<LoadingAnimation />
+					</div>
+				)}
 			</div>
 
 			<nav className="mt-5 text-sm text-gray-500 hover:bg-amber-100 rounded-xl p-2">
