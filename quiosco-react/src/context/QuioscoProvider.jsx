@@ -83,6 +83,12 @@ const QuioscoProvider = ({ children }) => {
 				"/api/pedidos",
 				{
 					total,
+					productos: pedido.map((producto) => {
+						return {
+							id: producto.id,
+							cantidad: producto.cantidad,
+						};
+					}),
 				},
 				{
 					headers: {
