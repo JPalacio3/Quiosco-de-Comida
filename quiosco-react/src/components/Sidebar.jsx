@@ -5,13 +5,17 @@ import { useAuth } from "../hooks/useAuth.js";
 
 export default function Sidebar() {
 	const { categorias } = useQuiosco();
-	const { logout } = useAuth({ middleware: "auth" });
+	const { logout, user } = useAuth({ middleware: "auth" });
 
 	return (
-		<aside className="md:w-72 mr-2 ">
+		<aside className="md:w-72 mh-20 ">
 			<div className="p-4">
 				<img className="w-40" src="img/logo.svg" alt="Imágen de Logotipo" />
 			</div>
+
+			<h3 className="text-xl text-yellow-500 ps-5 font-bold">
+				😋 Hola {user?.name}😋
+			</h3>
 
 			<div className="mt-10">
 				{categorias.map((categoria) => (

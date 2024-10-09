@@ -69,7 +69,7 @@ export default function Login() {
 							id="password"
 							className="mt-2 w-full p-3 bg-gray-50 rounded-xl"
 							name="password"
-							placeholder="Escribe una contraseña segura"
+							placeholder="Escribe Tu Contraseña"
 							ref={passwordRef}
 						/>
 					</div>
