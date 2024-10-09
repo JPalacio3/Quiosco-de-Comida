@@ -1,9 +1,11 @@
 /** @format */
 import useQuiosco from "../hooks/useQuiosco.js";
 import Categoria from "./Categoria.jsx";
+import { useAuth } from "../hooks/useAuth.js";
 
 export default function Sidebar() {
 	const { categorias } = useQuiosco();
+	const { logout } = useAuth({ middleware: "auth" });
 
 	return (
 		<aside className="md:w-72 mr-2 ">
@@ -20,7 +22,8 @@ export default function Sidebar() {
 			<div className="my-5 px-5">
 				<button
 					type="button"
-					className="text-center bg-red-500 hover:bg-red-700 w-full p-3 font-bold text-white truncate rounded">
+					className="text-center bg-red-500 hover:bg-red-700 w-full p-3 font-bold text-white truncate rounded"
+					onClick={logout}>
 					Cancelar Orden
 				</button>
 			</div>
