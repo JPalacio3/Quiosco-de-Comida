@@ -19,7 +19,7 @@ export default function AdminSidebar() {
 				</Link>
 
 				<Link
-					to={"/productos"}
+					to={"/admin/productos"}
 					className="font-bold font-lg hover:bg-amber-400 p-5 rounded-lg">
 					Productos
 				</Link>

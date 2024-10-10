@@ -69,6 +69,18 @@ export const useAuth = ({ middleware, url }) => {
 		if (middleware === "guest" && url && user) {
 			navigate(url);
 		}
+
+		// Redireccionamiento si el usuario es Admin
+		if (middleware == "guest" && user && user.admin) {
+			navigate("/admin");
+		}
+
+		// Protección para que el usuario que no es Administrados no pueda acceder a la url: /admin
+		if (middleware === "admin" && user && !user.admin) {
+			navigate("/");
+		}
+
+		// Redireccionamiento si el usuario NO es Admin
 		if (middleware == "auth" && error) {
 			navigate("/auth/login");
 		}

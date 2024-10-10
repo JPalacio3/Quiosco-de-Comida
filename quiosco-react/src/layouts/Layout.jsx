@@ -23,7 +23,9 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function layout() {
-	const { user, error } = useAuth({ middleware: "auth" });
+	// Solo pueden acceder usuarios autenticados
+	useAuth({ middleware: "auth" });
+
 	const { modal } = useQuiosco();
 
 	return (
