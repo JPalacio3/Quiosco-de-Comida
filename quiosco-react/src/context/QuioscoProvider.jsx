@@ -54,10 +54,14 @@ const QuioscoProvider = ({ children }) => {
 				pedidoState.id === producto.id ? producto : pedidoState,
 			);
 			setPedido(pedidoActualizado);
-			toast.success("Pedido Actualizado Correctamente");
+			toast.success("Pedido Actualizado Correctamente", {
+				autoClose: 700,
+			});
 		} else {
 			setPedido([...pedido, producto]);
-			toast.success("Agregado al pedido");
+			toast.success("Agregado al pedido", {
+				autoClose: 700,
+			});
 		}
 	};
 
@@ -72,14 +76,16 @@ const QuioscoProvider = ({ children }) => {
 	const handleEliminarProductoPedido = (id) => {
 		const pedidoActualizado = pedido.filter((producto) => producto.id !== id);
 		setPedido(pedidoActualizado);
-		toast.error("Producto Eliminado");
+		toast.error("Producto Eliminado", {
+			autoClose: 700,
+		});
 	};
 
-	const handleSubmitNuevaOrden = async () => {
+	const handleSubmitNuevaOrden = async (logout) => {
 		const token = localStorage.getItem("AUTH_TOKEN");
 
 		try {
-			await clienteAxios.post(
+			const { data } = await clienteAxios.post(
 				"/api/pedidos",
 				{
 					total,
@@ -96,6 +102,19 @@ const QuioscoProvider = ({ children }) => {
 					},
 				},
 			);
+
+			toast.success(data.message, {
+				position: "top-center",
+			});
+			setTimeout(() => {
+				setPedido([]);
+			}, 800);
+
+			// Cerrar la sesión del usuario
+			setTimeout(() => {
+				localStorage.removeItem("AUTH_TOKEN");
+				logout();
+			}, 4000);
 		} catch (error) {
 			console.log(error);
 		}

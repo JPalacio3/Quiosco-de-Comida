@@ -61,6 +61,7 @@ export default function Login() {
 							name="email"
 							placeholder="Tu Email"
 							ref={emailRef}
+							autoComplete="off"
 						/>
 					</div>
 
@@ -75,6 +76,7 @@ export default function Login() {
 							name="password"
 							placeholder="Escribe Tu Contraseña"
 							ref={passwordRef}
+							autoComplete="off"
 						/>
 					</div>
 
