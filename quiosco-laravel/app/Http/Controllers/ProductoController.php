@@ -34,7 +34,12 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        // Marcar un producto como agotado
+        $producto->disponible = 0;
+        $producto->save();
+        return [
+            'producto' => $producto
+        ];
     }
 
     /**
