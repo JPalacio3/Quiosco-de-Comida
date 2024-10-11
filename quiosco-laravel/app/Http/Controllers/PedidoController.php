@@ -70,7 +70,12 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        //
+        // Marcar un pedido como completado
+        $pedido->estado = 1;
+        $pedido->save();
+        return [
+            'pedido' => $pedido
+        ];
     }
 
     /**

@@ -3,11 +3,12 @@
 import useSWR from "swr";
 import clienteAxios from "../config/axios";
 import { LoadingAnimation } from "../components/Animation";
+import useQuiosco from "../hooks/useQuiosco";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/es";
-import { formatearDinero } from "../helpers";
+import { formatearDinero, fechaActual } from "../helpers";
 
 // Extender dayjs con el plugin
 dayjs.extend(relativeTime);
@@ -28,6 +29,8 @@ export default function Ordenes() {
 		refreshInterval: 1000,
 	});
 
+	const { handleClickCompletarPedido } = useQuiosco();
+
 	// Manejo de error
 	if (error) return <div>Error al cargar los productos.</div>;
 
@@ -43,7 +46,10 @@ export default function Ordenes() {
 	return (
 		<>
 			<div>
-				<h1 className="text-4xl font-black">Ordenes</h1>
+				<div className="flex items-center font-bold justify-between">
+					<h1 className="text-4xl font-black">Ordenes</h1>
+					<p className="text-xl">{fechaActual()}</p>
+				</div>
 				<p className="text-2xl my-10">Administra las ordenes desde Aquí</p>
 			</div>
 
@@ -54,6 +60,7 @@ export default function Ordenes() {
 						key={pedido.id}>
 						<p className="text-xl font-bold text-slate-600">
 							Contenido del Pedido:{""}
+							<span className="text-indigo-500"> orden # {pedido.id}</span>
 						</p>
 						{pedido.productos.map((producto) => (
 							<div className="border-b border-b-slate-200 py-4">
@@ -80,7 +87,10 @@ export default function Ordenes() {
 						</div>
 						<button
 							className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 rounded uppercase font-bold text-white text-center w-full cursor-pointer"
-							type="button">
+							type="button"
+							onClick={() => {
+								handleClickCompletarPedido(pedido.id);
+							}}>
 							Completar
 						</button>
 					</div>
